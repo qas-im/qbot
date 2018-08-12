@@ -1,1 +1,1 @@
-{"clothing": {"hat": "OS", "shirt": "medium", "pants": "small"}}
+{"clothing": {"hat": "OS", "shirt": "small", "pants": "large"}, "shipping": {"city": "San Francisco", "last": "Doe", "zip": "12345", "state": "California", "street": "123 California St", "first": "John"}}
