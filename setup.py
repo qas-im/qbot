@@ -8,26 +8,46 @@ def gather_info():
     asks for shipping info
     writes dict to json file called configuration.json
     """
-    # initial variables; master dictionary, placeholders for user input, while loop control
+    # initial variables; master dictionary and confirmation control
     info = {}
-    clothing = ""
+    confirmation = "no"
+    
+    # while loop that gathers clothing dictionary until user is satisfied with dictionary
+    while confirmation != "yes":
+        clothing = clothing_info()
+        confirmation = raw_input("\nIs the info you entered correct? (yes to continue/any key to restart): ")
+    info["clothing"] = clothing
+
+    # while loop that gathers shipping dictionary until user is satisfied with dictionary
+    confirmation = "no"
+    while confirmation != "yes":
+        shipping = shipping_info()
+        confirmation = raw_input("\nIs the info you entered correct? (yes to continue/any key to restart): ")
+    info["shipping"] = shipping
+
+    return info
+
+
+def clothing_info():
+    """
+    function responsible for gathering clothing info
+    clothes are keys while sizes are values
+    """
+    # dictionary for storing all clothing info, placeholders for user input, and while loop controller
+    clothing = {}
+    name = ""
     size = ""
     keep_adding = "yes"
 
-    # outer while loop repeates process until user confirms their inputs
-    confirmation = "no"
-    while confirmation != "yes":
-        # while loop storing clothes as keys, sizes as values; stops when user enters no at end
-        clothing_dict = {}
-        while keep_adding != "no":
-            clothing = raw_input("\nPlease enter name of clothing (or partial match): ")
-            size = raw_input("\nPlease enter size of clothing (OS for one size): ")
-            clothing_dict[clothing] = size
-            keep_adding = raw_input("\nAdd another? (no to finish/any key to continue): ")
-        confirmation = raw_input("Is the info you entered correct? (yes to continue/any key to restart): ")
-    info["clothing"] = clothing_dict
+    # while loop repeatedly asks user for name and size until user says no 
+    while keep_adding != "no":
+        name = raw_input("\nPlease enter name of clothing (or partial name): ")
+        size = raw_input("\nPlease enter size of clothing (OS for one size): ")
+        clothing[name] = size
+        keep_adding = raw_input("\nAdd another? (no to finish/any key to continue): ")
 
-    return info                     # dict full of clothing user wants
+    # returns dictionary
+    return clothing
 
 
 def shipping_info():
