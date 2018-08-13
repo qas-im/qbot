@@ -10,26 +10,31 @@ from selenium.common.exceptions import NoSuchElementException
 
 driver = webdriver.Chrome("/usr/local/bin/chromedriver")    # starting chrome driver
 wait = WebDriverWait(driver, 20)                            # wait used for timing out loading
-
+with open("./config.json","r") as configuration:            # opening config.json
+    info = json.load(configuration)                        # loading data into info dict
+    configuration.close()                                   # closing config.json to avoid corruption
 
 # goes to google sign in, waits for email entry to load, enters email address, and clicks next
 driver.get("https://accounts.google.com/signin/v2/identifier?hl=en&passive=true&continue=https%3A%2F%2Fwww.google.com%2F&flowName=GlifWebSignIn&flowEntry=ServiceLogin")
 email = wait.until(EC.presence_of_element_located((By.XPATH,'//*[@id="identifierId"]')))
-email.send_keys("first.last")
+email.send_keys(info["google"]["email"])
 driver.find_element_by_xpath('//*[@id="identifierNext"]/content').click()
 
 
 # waits for password entry to load, enters password, and clicks next
 password = wait.until(EC.presence_of_element_located((By.XPATH,'//*[@id="password"]/div[1]/div/div[1]/input')))
-password.send_keys("password123")
+password.send_keys(info["google"]["password"])
 driver.find_element_by_xpath('//*[@id="passwordNext"]/content/span').click()
 
 
 # goes to captcha practive and waits to load supreme page 30 seconds before drop
-"""driver.get("https://www.google.com/recaptcha/api2/demo")
-current_time = datetime.now()
+driver.get("https://www.google.com/recaptcha/api2/demo")
+"""current_time = datetime.now()
 while current_time.minute != 59 or current_time.second != 40:
     current_time = datetime.now()"""
+
+# temporary sleep for testing
+sleep(30)
 
 # loads website and waits for a certain time before starting
 driver.get("https://thechinatownmarket.com/")
