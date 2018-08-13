@@ -1,3 +1,4 @@
+import json
 from time import sleep,time
 from datetime import datetime
 from selenium import webdriver
@@ -8,19 +9,39 @@ from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
 
 driver = webdriver.Chrome("/usr/local/bin/chromedriver")    # starting chrome driver
-driver.get("https://thechinatownmarket.com/")               # loading up chinatown website
 wait = WebDriverWait(driver, 20)                            # wait used for timing out loading
 
-# waits for a certain time before starting
-current_time = datetime.now()                               # getting current time
-while current_time.second != 45:                            # wait for time to hit exactly 11:00
+
+# goes to google sign in, waits for email entry to load, enters email address, and clicks next
+driver.get("https://accounts.google.com/signin/v2/identifier?hl=en&passive=true&continue=https%3A%2F%2Fwww.google.com%2F&flowName=GlifWebSignIn&flowEntry=ServiceLogin")
+email = wait.until(EC.presence_of_element_located((By.XPATH,'//*[@id="identifierId"]')))
+email.send_keys("first.last")
+driver.find_element_by_xpath('//*[@id="identifierNext"]/content').click()
+
+
+# waits for password entry to load, enters password, and clicks next
+password = wait.until(EC.presence_of_element_located((By.XPATH,'//*[@id="password"]/div[1]/div/div[1]/input')))
+password.send_keys("password123")
+driver.find_element_by_xpath('//*[@id="passwordNext"]/content/span').click()
+
+
+# goes to captcha practive and waits to load supreme page 30 seconds before drop
+"""driver.get("https://www.google.com/recaptcha/api2/demo")
+current_time = datetime.now()
+while current_time.minute != 59 or current_time.second != 40:
+    current_time = datetime.now()"""
+
+# loads website and waits for a certain time before starting
+driver.get("https://thechinatownmarket.com/")
+"""current_time = datetime.now()                               # getting current time
+while current_time.hour != 11:                              # wait for time to hit exactly 11:00
     driver.refresh()                                        # refresh page
-    current_time = datetime.now()                           # get current time again
+    current_time = datetime.now()"""                           # get current time again
 start_time = time()                                         # get start time once bot moves through site
 
 
 # waits for item to load and clicks item
-link = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, 'a[href*="thank-you"]')))
+link = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, 'a[href*="ctm-l-s"]')))
 link.click()
 
 
