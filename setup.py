@@ -10,7 +10,16 @@ def gather_info():
     """
     # master dictionary
     info = {}
-    
+
+
+    # while loop that gathers clothing dictionary until user is satisfied with dictionary
+    confirmation = "no"
+    while confirmation != "yes":
+        google = google_info()
+        confirmation = raw_input("\nIs the info you entered correct? (yes to continue/any key to restart): ")
+    info["google"] = google
+
+
     # while loop that gathers clothing dictionary until user is satisfied with dictionary
     confirmation = "no"
     while confirmation != "yes":
@@ -51,7 +60,7 @@ def clothing_info():
         clothing[name] = size
         keep_adding = raw_input("\nAdd another? (no to finish/any key to continue): ")
 
-    # returns dictionary
+    # returns dict
     return clothing
 
 
@@ -78,7 +87,7 @@ def shipping_info():
     shipping["state"] = state
     shipping["zip"] = zip_code
 
-    # returns dictionary
+    # returns dict
     return shipping
 
 
@@ -99,7 +108,27 @@ def billing_info():
     billing["expiration"] = expiration
     billing["cvv"] = cvv
 
+    # returns dict
     return billing
+
+
+def google_info():
+    """
+    function responsible for gathering google sign in information
+    """
+    # dictionary storing all google sign in info
+    google = {}
+
+    # asking user for information
+    email = raw_input("\nPlease enter your email address: ")
+    password = raw_input("\nPlease enter your password: ")
+
+    # adding information to dict
+    google["email"] = email
+    google["password"] = password
+
+    # returns dict
+    return google
 
 
 if __name__ == "__main__":
