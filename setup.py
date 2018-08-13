@@ -6,13 +6,13 @@ def gather_info():
     function responsible for making a dict of all desired clothes
     repeatedly asks for user input until user specifies they are done
     asks for shipping info
-    writes dict to json file called configuration.json
+    writes dict to json file called config.json
     """
-    # initial variables; master dictionary and confirmation control
+    # master dictionary
     info = {}
-    confirmation = "no"
     
     # while loop that gathers clothing dictionary until user is satisfied with dictionary
+    confirmation = "no"
     while confirmation != "yes":
         clothing = clothing_info()
         confirmation = raw_input("\nIs the info you entered correct? (yes to continue/any key to restart): ")
@@ -25,6 +25,13 @@ def gather_info():
         confirmation = raw_input("\nIs the info you entered correct? (yes to continue/any key to restart): ")
     info["shipping"] = shipping
 
+    # while loop that gathers billing dictionary until user is satisfied with dictionary
+    confirmation = "no"
+    while confirmation != "yes":
+        billing = billing_info()
+        confirmation = raw_input("\nIs the info you entered correct? (yes to continue/any key to restart): ")
+    info["billing"] = billing
+
     return info
 
 
@@ -33,10 +40,8 @@ def clothing_info():
     function responsible for gathering clothing info
     clothes are keys while sizes are values
     """
-    # dictionary for storing all clothing info, placeholders for user input, and while loop controller
+    # dictionary for storing all clothing info and string for controlling while loop
     clothing = {}
-    name = ""
-    size = ""
     keep_adding = "yes"
 
     # while loop repeatedly asks user for name and size until user says no 
@@ -75,6 +80,26 @@ def shipping_info():
 
     # returns dictionary
     return shipping
+
+
+def billing_info():
+    """
+    function responsible for gathering billing information
+    """
+    # dictionary storing all billing info
+    billing = {}
+
+    # asking user for information
+    card_number = raw_input("\nPlease enter your credit card number: ")
+    expiration = raw_input("\nPlease enter your credit card's expiration date: ")
+    cvv = raw_input("\nPlease enter your credit card's cvv: ")
+
+    # adding information to dict
+    billing["number"] = card_number
+    billing["expiration"] = expiration
+    billing["cvv"] = cvv
+
+    return billing
 
 
 if __name__ == "__main__":
