@@ -11,14 +11,12 @@ def gather_info():
     # master dictionary
     info = {}
 
-
     # while loop that gathers clothing dictionary until user is satisfied with dictionary
     confirmation = "no"
     while confirmation != "yes":
         google = google_info()
         confirmation = raw_input("\nIs the info you entered correct? (yes to continue/any key to restart): ")
     info["google"] = google
-
 
     # while loop that gathers clothing dictionary until user is satisfied with dictionary
     confirmation = "no"
@@ -57,7 +55,8 @@ def clothing_info():
     while keep_adding != "no":
         name = raw_input("\nPlease enter name of clothing (or partial name): ")
         size = raw_input("\nPlease enter size of clothing (OS for one size): ")
-        clothing[name] = size
+        category = raw_input("\nPlease enter category of clothing: ")
+        clothing[name] = [size,category]
         keep_adding = raw_input("\nAdd another? (no to finish/any key to continue): ")
 
     # returns dict
