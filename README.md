@@ -1,4 +1,4 @@
-## qbot
+# qbot
 
 Remember back in the day when you could go online and buy things without any concerns? Well those times are long over and we now live in the era of bots. These bots are terrible and horrible creations that prevent everyday people like myself from buying things online. So if you can't beat 'em, join 'em. That's why I've made my own bot here for me and everyone to use. This bot has been generally structured using thechinatownmarket.com and will be optimized for supremenewyork.com once their website is available to use again on August 27th 2018.
 
@@ -7,9 +7,9 @@ Remember back in the day when you could go online and buy things without any con
 
 Sorry to non-OSX users but I built this program exclusively on my macbook so you might have to go a little bit further out of your way to get this set up properly. If you have a mac pretty much all you have to do is copy and paste the following commands, I added descriptions if you want an in depth.
 
-'''
+```
 pip install selenium
-'''
+```
 
 This command will install selenium, a tool used for web automation. This tool is what lets us control the web browser; e.g. going to web pages, clicking links, waiting for things to load on the page, etc.
 
@@ -18,10 +18,10 @@ Next you're going to want to [click this](https://chromedriver.storage.googleapi
 
 Lastly you'll want to unzip the file we just downloaded and run the following commands in the terminal. If you don't know how to open the terminal just press COMMAND + SPACE and search for the word "terminal". Once you're there copy and paste these commands in and press enter.
 
-'''
+```
 cd Downloads
 mv chromedriver /usr/local/bin
-'''
+```
 
 The "cd Downloads" command is going to the directory on your computer that contains all of your downloads. The command after that is just moving chromedriver to a different directory on your computer called "user/local/bin". This a space in your computer commonly and optimally used for putting these types of resources. 
 
