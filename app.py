@@ -91,10 +91,32 @@ class Application:
 
 
 	def add_item(self, name, size, category):
-		pass
+		"""
+		CAN'T FINISH UNTIL OFFICIAL SITE POSTED
+		method responsible for going to clothing category link, clicking clothing, selecting size, and adding to cart
+		"""
+		self.driver.get("https://supremenewyork.com/shop/"+category)
+    	link = self.wait_css('a[href*="{}"]'.format(name))
+    	link.click()
+    	# checks to see if size selection is necessary, waits for dropdown to load, selects size, and adds to cart
+    	if size != "OS":
+			# CAN'T FINISH UNTIL SUPREME POSTS SITE; NEED XPATH
+        	dropdown = self.wait_xpath('//*[@id="SingleOptionSelector-0"]')
+        	select = Select(dropdown)
+        	select.select_by_visible_text(size)
+			# CAN'T FINISH UNTIL SUPREME POSTS SITE; NEED XPATH
+        	driver.find_element_by_xpath('//*[@id="shopify-section-product"]/div/div/div[2]/form/div/button/span').click()
+    	else:
+			# CAN'T FINISH UNTIL SUPREME POSTS SITE; NEED XPATH
+        	add_to_cart = self.wait_xpath('//*[@id="shopify-section-product"]/div/div[1]/div[2]/form/button')
+        	add_to_cart.click()
 
 
 	def checkout(self, shipping, billing):
+		"""
+		CAN'T START UNTIL OFFICIAL SITE POSTED
+		method responsible for going to checkout page and entering all info
+		"""
 		pass
 
 
@@ -103,10 +125,15 @@ class Application:
 		method which runs all parts of program together
 		"""
 		self.google_sign_in()
-		self.wait_until(18,12,20,False)
-		self.driver.get("https://www.supremenewyork.com")
-		self.wait_until(18,12,25)
+		self.wait_until(10, 59, 40, False)
+		self.driver.get("https://www.supremenewyork.com/shop")
+		self.wait_until(11, 00, 00, True)
+		start_time = time()
+		for name, [size, category] in self.clothing.items():
+			self.add_item(name, size, category)
 		self.driver.close()
+		print("~~~~~ Finished in {0:.2f} seconds ~~~~~"
+        .format(time() - start_time))
 
 
 # driver = webdriver.Chrome("/usr/local/bin/chromedriver")    # starting chrome driver
@@ -148,18 +175,18 @@ class Application:
 # # iterates through clothing list in info dict; separates all variables by name, size, and category
 # for name,[size,category] in info["clothing"].items():
 #     # first goes to category page, then finds clothing with name in link and clicks it
-#     driver.get("https://thechinatownmarket.com/collections/"+category)
-#     link = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, 'a[href*="{}"]'.format(name))))
-#     link.click()
-#     # checks to see if size selection is necessary, waits for dropdown to load, selects size, and adds to cart
-#     if size != "OS":
-#         dropdown = wait.until(EC.presence_of_element_located((By.XPATH,'//*[@id="SingleOptionSelector-0"]')))
-#         select = Select(dropdown)
-#         select.select_by_visible_text(size)
-#         driver.find_element_by_xpath('//*[@id="shopify-section-product"]/div/div/div[2]/form/div/button/span').click()
-#     else:
-#         add_to_cart = wait.until(EC.presence_of_element_located((By.XPATH,'//*[@id="shopify-section-product"]/div/div[1]/div[2]/form/button')))
-#         add_to_cart.click()
+    # driver.get("https://thechinatownmarket.com/collections/"+category)
+    # link = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, 'a[href*="{}"]'.format(name))))
+    # link.click()
+    # # checks to see if size selection is necessary, waits for dropdown to load, selects size, and adds to cart
+    # if size != "OS":
+    #     dropdown = wait.until(EC.presence_of_element_located((By.XPATH,'//*[@id="SingleOptionSelector-0"]')))
+    #     select = Select(dropdown)
+    #     select.select_by_visible_text(size)
+    #     driver.find_element_by_xpath('//*[@id="shopify-section-product"]/div/div/div[2]/form/div/button/span').click()
+    # else:
+    #     add_to_cart = wait.until(EC.presence_of_element_located((By.XPATH,'//*[@id="shopify-section-product"]/div/div[1]/div[2]/form/button')))
+    #     add_to_cart.click()
 
 # # waits for checkout button to load and clicks it
 # checkout = wait.until(EC.presence_of_element_located((By.XPATH, '//*[@id="MainContent"]/div/div/form/div[3]/input[2]')))
