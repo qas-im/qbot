@@ -1,6 +1,6 @@
 # qbot
 
-Remember back in the day when you could go online and buy things without any concerns? Well those times are long over and we now live in the era of bots. These bots are terrible and horrible creations that prevent everyday people like myself from buying things online. So if you can't beat 'em, join 'em. That's why I've made my own bot here for me and everyone to use. This bot has been generally structured using thechinatownmarket.com and will be optimized for supremenewyork.com once their website is available to use again on August 27th 2018.
+Remember back in the day when you could go online and buy things without any concerns? Well those times are long over and we now live in the era of bots. These bots are terrible and horrible creations that prevent everyday people like myself from buying things online. So if you can't beat 'em, join 'em. That's why I've made my own bot here for me and everyone to use. This bot has been generally structured using thechinatownmarket.com and will be optimized for supremenewyork.com once their website is available to use again on August 20th 2018.
 
 
 ### Setup
