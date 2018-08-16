@@ -8,6 +8,38 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
 
+
+class Application:
+    
+    def __init__(self):
+        pass
+
+
+    @staticmethod
+    def load_configuration():
+        pass
+
+
+    def google_sign_in(self, email, password):
+        pass
+
+   
+    def wait_until(self, hour, minute, second):
+        pass
+
+
+    def add_item(self, name, size, category):
+        pass
+
+
+    def checkout(self, shipping, billing):
+        pass
+
+
+    def run(self):
+        pass
+
+
 driver = webdriver.Chrome("/usr/local/bin/chromedriver")    # starting chrome driver
 wait = WebDriverWait(driver, 20)                            # wait used for timing out loading
 with open("./config.json","r") as configuration:            # opening config.json
