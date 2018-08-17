@@ -127,7 +127,6 @@ class Application:
 		print("~~~~~ Finished in {0:.2f} seconds ~~~~~"
         .format(time() - start_time))
 
-
 # driver = webdriver.Chrome("/usr/local/bin/chromedriver")    # starting chrome driver
 # wait = WebDriverWait(driver, 20)                            # wait used for timing out loading
 # with open("./config.json","r") as configuration:            # opening config.json
