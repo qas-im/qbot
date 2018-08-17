@@ -23,7 +23,6 @@ class Application:
 		self.shipping = self.info["shipping"]
 		self.billing = self.info["billing"]
 
-
 	@staticmethod
 	def load_configuration():
 		"""
@@ -35,7 +34,6 @@ class Application:
 			configuration.close()
 		return info
 
-
 	def wait_xpath(self, xpath):
 		"""
 		method responsible for waiting until an asset loads by xpath
@@ -43,14 +41,12 @@ class Application:
 		wait = WebDriverWait(self.driver, 20)
 		return wait.until(EC.presence_of_element_located((By.XPATH, xpath)))
 
-
 	def wait_css(self, css):
 		"""
 		method responsible for waiting until an asset loads by css_selector
 		"""
 		wait = WebDriverWait(self.driver, 20)
 		return wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, css)))
-
 
 	def wait_until(self, hour, minute, second, refresh=True):
 		"""
@@ -63,7 +59,6 @@ class Application:
 			if refresh:
 				self.driver.refresh()
 			current_time = datetime.now()
-
 
 	def google_sign_in(self, email=None, password=None):
 		"""
@@ -89,28 +84,26 @@ class Application:
 		# loads captcha site
 		self.driver.get("https://www.google.com/recaptcha/api2/demo")
 
-
 	def add_item(self, name, size, category):
 		"""
 		CAN'T FINISH UNTIL OFFICIAL SITE POSTED
 		method responsible for going to clothing category link, clicking clothing, selecting size, and adding to cart
 		"""
 		self.driver.get("https://supremenewyork.com/shop/"+category)
-    	link = self.wait_css('a[href*="{}"]'.format(name))
-    	link.click()
-    	# checks to see if size selection is necessary, waits for dropdown to load, selects size, and adds to cart
-    	if size != "OS":
+		link = self.wait_css('a[href*="{}"]'.format(name))
+		link.click()
+		# checks to see if size selection is necessary, waits for dropdown to load, selects size, and adds to cart
+		if size != "OS":
 			# CAN'T FINISH UNTIL SUPREME POSTS SITE; NEED XPATH
-        	dropdown = self.wait_xpath('//*[@id="SingleOptionSelector-0"]')
-        	select = Select(dropdown)
-        	select.select_by_visible_text(size)
+			dropdown = self.wait_xpath('//*[@id="SingleOptionSelector-0"]')
+			select = Select(dropdown)
+			select.select_by_visible_text(size)
 			# CAN'T FINISH UNTIL SUPREME POSTS SITE; NEED XPATH
-        	driver.find_element_by_xpath('//*[@id="shopify-section-product"]/div/div/div[2]/form/div/button/span').click()
-    	else:
+			driver.find_element_by_xpath('//*[@id="shopify-section-product"]/div/div/div[2]/form/div/button/span').click()
+		else:
 			# CAN'T FINISH UNTIL SUPREME POSTS SITE; NEED XPATH
-        	add_to_cart = self.wait_xpath('//*[@id="shopify-section-product"]/div/div[1]/div[2]/form/button')
-        	add_to_cart.click()
-
+			add_to_cart = self.wait_xpath('//*[@id="shopify-section-product"]/div/div[1]/div[2]/form/button')
+			add_to_cart.click()
 
 	def checkout(self, shipping, billing):
 		"""
@@ -118,7 +111,6 @@ class Application:
 		method responsible for going to checkout page and entering all info
 		"""
 		pass
-
 
 	def run(self):
 		"""
