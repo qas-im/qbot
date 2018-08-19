@@ -71,16 +71,14 @@ def shipping_info():
     shipping = {}
     
     # asking user for information
-    first_name = raw_input("\nPlease enter first name: ")
-    last_name = raw_input("\nPlease enter last name: ")
+    name = raw_input("\nPlease enter first and last name: ")
     street = raw_input("\nPlease enter street address: ")
     city = raw_input("\nPlease enter city: ")
     state = raw_input("\nPlease enter state: ")
     zip_code = raw_input("\nPlease enter zip code: ")
 
     # adding information to dict
-    shipping["first"] = first_name
-    shipping["last"] = last_name
+    shipping["name"] = name
     shipping["street"] = street
     shipping["city"] = city
     shipping["state"] = state
