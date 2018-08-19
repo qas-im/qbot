@@ -97,12 +97,14 @@ def billing_info():
 
     # asking user for information
     card_number = raw_input("\nPlease enter your credit card number: ")
-    expiration = raw_input("\nPlease enter your credit card's expiration date: ")
+    expiration_month = raw_input("\nPlease enter your credit card's expiration_month date: ")
+	expiration_year = raw_input("\nPlease enter your credit card's expiration_year date: ")
     cvv = raw_input("\nPlease enter your credit card's cvv: ")
 
     # adding information to dict
     billing["number"] = card_number
-    billing["expiration"] = expiration
+    billing["expiration_month"] = expiration_month
+	billing["expiration_year"] = expiration_year
     billing["cvv"] = cvv
 
     # returns dict
