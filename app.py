@@ -84,7 +84,7 @@ class Application:
 		# loads captcha site
 		self.driver.get("https://www.google.com/recaptcha/api2/demo")
 
-	def add_item(self, name, size, category):
+	def add_item(self, name, size, category, url=None):
 		"""
 		CAN'T FINISH UNTIL OFFICIAL SITE POSTED
 		method responsible for going to clothing category link, clicking clothing, selecting size, and adding to cart
@@ -137,8 +137,8 @@ class Application:
 		self.driver.get("https://www.supremenewyork.com/shop")
 		self.wait_until(11, 00, 00, True)
 		start_time = time()
-		for name, [size, category] in self.clothing.items():
-			self.add_item(name, size, category)
+		for name, [size, category, url] in self.clothing.items():
+			self.add_item(name, size, category, url)
 		self.driver.close()
 		print("~~~~~ Finished in {0:.2f} seconds ~~~~~"
         .format(time() - start_time))
