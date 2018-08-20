@@ -56,7 +56,8 @@ def clothing_info():
         name = raw_input("\nPlease enter name of clothing (or partial name): ")
         size = raw_input("\nPlease enter size of clothing (OS for one size): ")
         category = raw_input("\nPlease enter category of clothing: ")
-        clothing[name] = [size,category]
+		url = raw_input("\nPlease enter url of clothing (or None if no url):")
+        clothing[name] = [size,category,url]
         keep_adding = raw_input("\nAdd another? (no to finish/any key to continue): ")
 
     # returns dict
