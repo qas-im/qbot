@@ -48,6 +48,14 @@ class Application:
 		wait = WebDriverWait(self.driver, 20)
 		return wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, css)))
 
+	def wait_text(self, text):
+		"""
+		method responsible for waiting until an asset loads by link_text
+		"""
+		wait = WebDriverWait(self.driver, 20)
+		return wait.until(EC.presence_of_element_located((By.LINK_TEXT, text)))
+
+
 	def wait_until(self, hour, minute, second, refresh=True):
 		"""
 		method responsible for waiting until a certain time
@@ -84,62 +92,64 @@ class Application:
 		# loads captcha site
 		self.driver.get("https://www.google.com/recaptcha/api2/demo")
 
-	def add_item(self, name, size, category, url=None):
+	def add_item(self, name, size, category, index):
 		"""
 		CAN'T FINISH UNTIL OFFICIAL SITE POSTED
 		method responsible for going to clothing category link, clicking clothing, selecting size, and adding to cart
 		"""
-		self.driver.get("https://supremenewyork.com/shop/all"+category)
-		link = self.wait_css('a[href*="{}"]'.format(name))
+		self.driver.get("https://www.supremenewyork.com/shop/all/"+category)
+		link = self.wait_text(name)
 		link.click()
+		if index != 1:
+			colour = self.wait_xpath('//*[@id="details"]/ul/li[{}]'.format(index))
+			colour.click()
 		# checks to see if size selection is necessary, waits for dropdown to load, selects size, and adds to cart
 		if size != "OS":
 			# CAN'T FINISH UNTIL SUPREME POSTS SITE; NEED XPATH
-			dropdown = self.wait_xpath('//*[@id="SingleOptionSelector-0"]')
+			dropdown = self.wait_xpath('//*[@id="s"]')
 			select = Select(dropdown)
 			select.select_by_visible_text(size)
-			# CAN'T FINISH UNTIL SUPREME POSTS SITE; NEED XPATH
-			driver.find_element_by_xpath('//*[@id="shopify-section-product"]/div/div/div[2]/form/div/button/span').click()
+			add_to_cart = self.wait_xpath('//*[@id="add-remove-buttons"]/input')
 		else:
-			# CAN'T FINISH UNTIL SUPREME POSTS SITE; NEED XPATH
-			add_to_cart = self.wait_xpath('//*[@id="shopify-section-product"]/div/div[1]/div[2]/form/button')
-			add_to_cart.click()
+			add_to_cart = self.wait_xpath('//*[@id="add-remove-buttons"]/input')
+		
+		add_to_cart.click()
 
 	def checkout(self, shipping, billing):
 		"""
 		CAN'T START UNTIL OFFICIAL SITE POSTED
 		method responsible for going to checkout page and entering all info
 		"""
-		# self.driver.get(LINK_TO_SUPREME_CHECKOUT)
-		# info = self.wait_xpath(XPATH_TO_FIRST_INFO_BOX)
-		# info.send_keys(self.shipping["name"] + Keys.TAB + \
-		# 				self.google["email"] + Keys.TAB + \
-		# 				self.shipping["address"] + Keys.TAB + Keys.TAB + \
-		# 				self.shipping["zip"] + Keys.TAB + \
-		# 				self.shipping["city"] + Keys.TAB + \
-		# 				self.shipping["state"] + Keys.TAB + \
-		# 				"USA" + Keys.TAB + Keys.TAB + Keys.TAB \
-		# 				self.billing["number"] + Keys.TAB + \
-		# 				self.billing["expiration_month"] + Keys.TAB + \
-		# 				self.billing["expiration_year"] + Keys.TAB + \
-		# 				self.billing["cvv"])
-		# accept = self.driver.find_element_by_xpath(XPATH_TO_TERMS_AND_SERVICES_BOX)
-		# accpet.click()
-		# checkout = self.driver.find_element_by_xpath(PATH_TO_CHECKOUT)
-		# # checkout.click()
+		info = self.wait_xpath('//*[@id="order_billing_name"]')
+		info.send_keys(shipping["name"] + Keys.TAB + \
+						google["email"] + Keys.TAB + \
+						shipping["phone"] + Keys.TAB + \
+						shipping["address"] + Keys.TAB + Keys.TAB + \
+						shipping["zip"] + Keys.TAB + \
+						shipping["city"] + Keys.TAB + \
+						shipping["state"] + Keys.TAB + \
+						"USA" + Keys.TAB + Keys.TAB + \
+						billing["number"] + Keys.TAB + \
+						billing["expiration_month"] + Keys.TAB + \
+						billing["expiration_year"] + Keys.TAB + \
+						billing["cvv"])
+		accept = self.driver.find_element_by_xpath('//*[@id="cart-cc"]/fieldset/p[2]/label/div/ins')
+		accpet.click()
 
 	def run(self):
 		"""
 		method which runs all parts of program together
 		"""
-		self.google_sign_in()
-		self.wait_until(10, 59, 40, False)
+		#self.google_sign_in()
+		#self.wait_until(10, 59, 40, False)
 		self.driver.get("https://www.supremenewyork.com/shop")
-		self.wait_until(11, 00, 00, True)
+		#self.wait_until(11, 00, 00, True)
+		sleep(2)
 		start_time = time()
-		for name, [size, category, url] in self.clothing.items():
-			self.add_item(name, size, category, url)
-		self.driver.close()
+		for name, [size, category, index] in self.clothing.items():
+			self.add_item(name, size, category, index)
+		self.driver.get("https://www.supremenewyork.com/checkout")
+		self.checkout(self.shipping,self.billing)
 		print("~~~~~ Finished in {0:.2f} seconds ~~~~~"
         .format(time() - start_time))
 
