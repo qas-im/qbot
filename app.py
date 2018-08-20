@@ -90,11 +90,10 @@ class Application:
 			password_box.send_keys(password)
 		self.driver.find_element_by_xpath('//*[@id="passwordNext"]/content/span').click()
 		# loads captcha site
-		self.driver.get("https://www.google.com/recaptcha/api2/demo")
+		# self.driver.get("https://www.google.com/recaptcha/api2/demo")
 
 	def add_item(self, name, size, category, index):
 		"""
-		CAN'T FINISH UNTIL OFFICIAL SITE POSTED
 		method responsible for going to clothing category link, clicking clothing, selecting size, and adding to cart
 		"""
 		self.driver.get("https://www.supremenewyork.com/shop/all/"+category)
@@ -105,81 +104,52 @@ class Application:
 			colour.click()
 		# checks to see if size selection is necessary, waits for dropdown to load, selects size, and adds to cart
 		if size != "OS":
-			# CAN'T FINISH UNTIL SUPREME POSTS SITE; NEED XPATH
 			dropdown = self.wait_xpath('//*[@id="s"]')
 			select = Select(dropdown)
 			select.select_by_visible_text(size)
 			add_to_cart = self.wait_xpath('//*[@id="add-remove-buttons"]/input')
 		else:
 			add_to_cart = self.wait_xpath('//*[@id="add-remove-buttons"]/input')
-		
+		# adds item to cart after selection has been made
 		add_to_cart.click()
 
-	def checkout(self, shipping, billing):
+	def checkout(self):
 		"""
-		CAN'T START UNTIL OFFICIAL SITE POSTED
 		method responsible for going to checkout page and entering all info
 		"""
+		# finds first info box and sends all keys
 		info = self.wait_xpath('//*[@id="order_billing_name"]')
-		info.send_keys(shipping["name"] + Keys.TAB + \
-						google["email"] + Keys.TAB + \
-						shipping["phone"] + Keys.TAB + \
-						shipping["address"] + Keys.TAB + Keys.TAB + \
-						shipping["zip"] + Keys.TAB + \
-						shipping["city"] + Keys.TAB + \
-						shipping["state"] + Keys.TAB + \
-						"USA" + Keys.TAB + Keys.TAB + \
-						billing["number"] + Keys.TAB + \
-						billing["expiration_month"] + Keys.TAB + \
-						billing["expiration_year"] + Keys.TAB + \
-						billing["cvv"])
+		info.send_keys(self.shipping["name"] + Keys.TAB + \
+						self.google["email"] + Keys.TAB + \
+						self.shipping["phone"] + Keys.TAB + \
+						self.shipping["street"] + Keys.TAB + Keys.TAB + \
+						self.shipping["zip"] + Keys.TAB*5 + \
+						self.billing["number"] + Keys.TAB + \
+						self.billing["expiration_month"] + Keys.TAB + \
+						self.billing["expiration_year"] + Keys.TAB + \
+						self.billing["cvv"])
+		# finds accept checkbox and clicks
 		accept = self.driver.find_element_by_xpath('//*[@id="cart-cc"]/fieldset/p[2]/label/div/ins')
-		accpet.click()
+		accept.click()
 
 	def run(self):
 		"""
 		method which runs all parts of program together
 		"""
-		#self.google_sign_in()
-		#self.wait_until(10, 59, 40, False)
-		self.driver.get("https://www.supremenewyork.com/shop")
-		#self.wait_until(11, 00, 00, True)
-		sleep(2)
+		self.google_sign_in()
+		self.wait_until(10, 59, 57, False)
+		self.driver.get("https://www.supremenewyork.com/shop/all")
+		self.wait_until(11, 00, 00, True)
 		start_time = time()
 		for name, [size, category, index] in self.clothing.items():
 			self.add_item(name, size, category, index)
+		sleep(1)
 		self.driver.get("https://www.supremenewyork.com/checkout")
-		self.checkout(self.shipping,self.billing)
+		self.checkout()
 		print("~~~~~ Finished in {0:.2f} seconds ~~~~~"
         .format(time() - start_time))
+		sleep(60)
 
-
-# # waits for first box to load, enters information, and clicks to shipping info
-# shipping = wait.until(EC.presence_of_element_located((By.XPATH, '//*[@id="checkout_email"]')))
-# shipping.send_keys(info["google"]["email"] + Keys.TAB + Keys.TAB + \
-#                info["shipping"]["first"] + Keys.TAB + \
-#                info["shipping"]["last"] + Keys.TAB + \
-#                info["shipping"]["street"] + Keys.TAB + Keys.TAB + \
-#                info["shipping"]["city"] + Keys.TAB + Keys.TAB + \
-#                info["shipping"]["state"] + Keys.TAB + \
-#                info["shipping"]["zip"])
-# driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div/form/div[2]/button').click()
-
-
-# # waits for continue to shipping button to load and clicks it
-# continue_button = wait.until(EC.presence_of_element_located((By.XPATH, '/html/body/div[2]/div/div[1]/div[2]/div/form/div[2]/button')))
-# continue_button.click()
-
-
-# # waits for payment info to load, enters information and clicks submit
-# payment = wait.until(EC.presence_of_element_located((By.XPATH, '//*[@id="main-header"]')))
-# payment.send_keys(Keys.TAB + Keys.TAB + \
-#                     info["billing"]["number"] + Keys.TAB + \
-#                     info["shipping"]["first"] + " " + info["shipping"]["last"] + Keys.TAB + \
-#                     info["billing"]["expiration"] + Keys.TAB + \
-#                     info["billing"]["cvv"])
-# submit = driver.find_element_by_xpath('/html/body/div[2]/div/div[1]/div[2]/div/div/form/div[4]/div[1]/button')
-# #submit.click() # uncomment to actually make purchase
 
 if __name__ == "__main__":
 	Application().run()
