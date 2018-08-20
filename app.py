@@ -89,7 +89,7 @@ class Application:
 		CAN'T FINISH UNTIL OFFICIAL SITE POSTED
 		method responsible for going to clothing category link, clicking clothing, selecting size, and adding to cart
 		"""
-		self.driver.get("https://supremenewyork.com/shop/"+category)
+		self.driver.get("https://supremenewyork.com/shop/all"+category)
 		link = self.wait_css('a[href*="{}"]'.format(name))
 		link.click()
 		# checks to see if size selection is necessary, waits for dropdown to load, selects size, and adds to cart
