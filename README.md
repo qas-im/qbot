@@ -58,7 +58,7 @@ I will now include some important things to remeber when entering data in each f
 
 ##### Shipping
 * Capitalization of first and last name don't matter too much, just make sure it matches the name on whatever card you plan to by with.
-* Enter your phone number raw, no symbols. If your number is +1(800)-123-4444 it would just be 8001234444.
+* Enter your phone number raw, no symbols. If your number is +1 (800)-123-4444 it would just be 8001234444.
 * So the city and state actually don't matter at all because I didn't know they get all that information from the zip code. I was just too lazy to code it out I'll fix it later. I would still just enter that information correctly for your own sake. Just ensure that your zip is correct.
 
 ##### Billing
@@ -68,7 +68,19 @@ I will now include some important things to remeber when entering data in each f
 
 #### Running the Program
 
-There is a very specific way in which the program runs. You should familiarize yourself before actually running the program...
+There is a very specific way in which the program runs. You should familiarize yourself before actually running the program.
+
+First off we want to start the program. To do this run the following command:
+
+```
+python app.py
+```
+
+This command will start running the program. First the program is going to automatically sign you in to google. It does this so that when you perform the captcha tests it will store the token with your account. Next you will manually go to google in the search barand search for "recapthca demo". Click the first link and complete the captcha test. It may take a little longer than your are used to because we are using an automated testing environment so it may pick up on that. Once you have done this the computer will wait until 3 seconds before the supreme drop. Once it is within three seconds, it will go to the site and refresh until the drop occurs.
+
+The program will then one by one add everything to your cart, take you to checkout, enter your billing and shipping info, and check the accept of terms and conditions. The very last step is to manually hit the checkout button. I've done this to ensure that you yourself can review the order/information before actually sending your money to supreme.
+
+These are are the necessary steps in order to use my bot to get some supreme. I hope that everything went smoothly getting to this point and I wish you good luck cooking!
 
 ### Authors
 
@@ -77,6 +89,6 @@ There is a very specific way in which the program runs. You should familiarize y
 
 ### Aknowledgements
 
-* Shoutout to GE Digital for introducing me to the wonders of Selenium
+* Shoutout to GE Digital for introducing me to the simple wonders of Selenium
 * Shoutout to Supreme for making me victim to hypebeast culture
-* Should out to my cat Petra, my sister J'smol, my mom the mayor, and my dad the doc
+* Should out to my cat Petra, my sister j'smol, my mom the mayor, and my dad the doc
