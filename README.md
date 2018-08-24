@@ -68,15 +68,15 @@ I will now include some important things to remeber when entering data in each f
 
 #### Running the Program
 
-There is a very specific way in which the program runs. You should familiarize yourself before actually running the program.
-
-First off we want to start the program. To do this run the following command:
+There is a very specific way in which the program runs. You should familiarize yourself before actually running the program. First off we want to start the program. To do this run the following command:
 
 ```
 python app.py
 ```
 
-This command will start running the program. First the program is going to automatically sign you in to google. It does this so that when you perform the captcha tests it will store the token with your account. Next you will manually go to google in the search barand search for "recapthca demo". Click the first link and complete the captcha test. It may take a little longer than your are used to because we are using an automated testing environment so it may pick up on that. Once you have done this the computer will wait until 3 seconds before the supreme drop. Once it is within three seconds, it will go to the site and refresh until the drop occurs.
+This command will start running the program. First the program is going to automatically sign you in to google. It does this so that when you perform the captcha tests it will store the token with your account. 
+
+Next you will manually go to google in the search barand search for "recapthca demo". Click the first link and you should be on a page with a captcha test. Don't start this test until about 2 minutes before the drop, the tokens only last about a minute and a half. It may take a little longer than your are used to because we are using an automated testing environment so it may pick up on that. Once you have done this the computer will wait until 3 seconds before the supreme drop. Once it is within three seconds, it will go to the site and refresh until the drop occurs.
 
 The program will then one by one add everything to your cart, take you to checkout, enter your billing and shipping info, and check the accept of terms and conditions. The very last step is to manually hit the checkout button. I've done this to ensure that you yourself can review the order/information before actually sending your money to supreme.
 
