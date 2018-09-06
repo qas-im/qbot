@@ -136,16 +136,16 @@ class Application:
 		"""
 		method which runs all parts of program together
 		"""
-		self.google_sign_in()
-		self.wait_until(10, 59, 57, False)
-		self.driver.get("https://www.supremenewyork.com/shop/all")
-		self.wait_until(11, 00, 00, True)
+		#self.google_sign_in()
+		#self.wait_until(10, 59, 57, False)
+		#self.driver.get("https://www.supremenewyork.com/shop/all")
+		self.wait_until(11, 00, 00, False)
 		start_time = time()
 		for name, [size, category, index] in self.clothing.items():
 			self.add_item(name, size, category, index)
 		sleep(1)
 		self.driver.get("https://www.supremenewyork.com/checkout")
-		self.checkout()
+		#self.checkout()
 		print("~~~~~ Finished in {0:.2f} seconds ~~~~~"
         .format(time() - start_time))
 		sleep(60)
